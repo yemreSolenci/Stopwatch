@@ -1,6 +1,6 @@
 ﻿namespace Stopwatch
 {
-    partial class Form1
+    partial class stopwatchForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -38,6 +38,7 @@
             startButton = new Button();
             stopwatchLabel = new Label();
             secondTimer = new System.Windows.Forms.Timer(components);
+            pauseResumeButton = new Button();
             SuspendLayout();
             // 
             // hourLabel
@@ -80,6 +81,7 @@
             hourTextBox.Text = "000";
             hourTextBox.TextAlign = HorizontalAlignment.Center;
             hourTextBox.ValidatingType = typeof(int);
+            hourTextBox.KeyDown += hourTextBox_KeyDown;
             // 
             // minuteTextBox
             // 
@@ -95,6 +97,7 @@
             minuteTextBox.TextAlign = HorizontalAlignment.Center;
             minuteTextBox.ValidatingType = typeof(int);
             minuteTextBox.TextChanged += minuteTextBox_TextChanged;
+            minuteTextBox.KeyDown += minuteTextBox_KeyDown;
             // 
             // secondTextBox
             // 
@@ -109,6 +112,7 @@
             secondTextBox.Text = "00";
             secondTextBox.TextAlign = HorizontalAlignment.Center;
             secondTextBox.TextChanged += secondTextBox_TextChanged;
+            secondTextBox.KeyDown += secondTextBox_KeyDown;
             // 
             // startButton
             // 
@@ -124,7 +128,7 @@
             // 
             stopwatchLabel.AutoSize = true;
             stopwatchLabel.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            stopwatchLabel.Location = new Point(154, 52);
+            stopwatchLabel.Location = new Point(156, 52);
             stopwatchLabel.MinimumSize = new Size(150, 45);
             stopwatchLabel.Name = "stopwatchLabel";
             stopwatchLabel.Size = new Size(150, 45);
@@ -137,11 +141,23 @@
             secondTimer.Interval = 1000;
             secondTimer.Tick += secondTimer_Tick;
             // 
-            // Form1
+            // pauseResumeButton
+            // 
+            pauseResumeButton.Enabled = false;
+            pauseResumeButton.Location = new Point(154, 124);
+            pauseResumeButton.Name = "pauseResumeButton";
+            pauseResumeButton.Size = new Size(174, 23);
+            pauseResumeButton.TabIndex = 8;
+            pauseResumeButton.Text = "DURAKLAT";
+            pauseResumeButton.UseVisualStyleBackColor = true;
+            pauseResumeButton.Click += pauseResumeButton_Click;
+            // 
+            // stopwatchForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(340, 159);
+            Controls.Add(pauseResumeButton);
             Controls.Add(stopwatchLabel);
             Controls.Add(startButton);
             Controls.Add(secondTextBox);
@@ -150,8 +166,10 @@
             Controls.Add(secondLabel);
             Controls.Add(minuteLabel);
             Controls.Add(hourLabel);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "stopwatchForm";
+            ShowIcon = false;
+            Text = "Stopwatch";
+            FormClosing += stopwatchForm_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -167,5 +185,6 @@
         private Button startButton;
         private Label stopwatchLabel;
         private System.Windows.Forms.Timer secondTimer;
+        private Button pauseResumeButton;
     }
 }
