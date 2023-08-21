@@ -4,8 +4,8 @@ namespace Stopwatch
 {
     public partial class stopwatchForm : Form
     {
-        TimeSpan time;
-        Boolean paused = false;
+        private TimeSpan time;
+        private Boolean paused = false;
 
         public stopwatchForm()
         {
@@ -59,8 +59,19 @@ namespace Stopwatch
             if (time == TimeSpan.Zero)
             {
                 secondTimer.Stop();
-                SystemSounds.Beep.Play();
+                SoundPlayer player = new();
+                try
+                {
+                    player.SoundLocation = "alarm.wav";
+                    player.Play();
+                }
+                catch (Exception ex)
+                {
+                    SystemSounds.Beep.Play();
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
                 MessageBox.Show("Süre Doldu!!");
+                player.Stop();
                 pauseResumeButton.Enabled = false;
             }
         }
